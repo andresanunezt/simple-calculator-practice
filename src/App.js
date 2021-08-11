@@ -31,11 +31,31 @@ class App extends Component {
     });
   };
 
+  backspace = () => {
+    this.setState({
+      result: this.state.result.slice(0, -1),
+    });
+  };
+
+  onClick = (button) => {
+    if (button === "=") {
+      this.calculate();
+    } else if (button === "C") {
+      this.reset();
+    } else if (button === "CE") {
+      this.backspace();
+    } else {
+      this.setState({
+        result: this.state.result + button,
+      });
+    }
+  };
+
   render() {
     return (
       <div className="App">
         <ResultComponent result={this.state.result} />
-        <KeyPad />
+        <KeyPad onClick={this.onClick} />
       </div>
     );
   }
